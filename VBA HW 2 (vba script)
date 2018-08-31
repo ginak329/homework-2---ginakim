@@ -1,0 +1,32 @@
+Attribute VB_Name = "Module4"
+Sub yearstock()
+
+       Dim ws As Worksheet
+
+         For Each ws In Worksheets
+
+        lastrow = ws.Cells(Rows.Count, "A").End(xlUp).Row + 1
+
+
+Dim ticker As String
+Dim stocktotal As Long
+stocktotal = 0
+Dim table As Integer
+table = 2
+
+For I = 2 To lastrow
+If ws.Cells(I + 1, 1).Value <> ws.Cells(I, 1).Value Then
+ticker = ws.Cells(I, 1).Value
+stocktotal = stocktotal + ws.Cells(I, 7).Value
+ws.Range("I" & table).Value = ticker
+ws.Range("J" & table).Value = stocktotal
+table = table + 1
+stocktotal = 0
+
+End If
+Next I
+
+         Next ws
+         
+End Sub
+
